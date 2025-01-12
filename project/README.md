@@ -17,12 +17,12 @@ Steps to Open website:
 
 5. Type 'pipenv shell'
 
-6. Type 'pipenv install'
+6. Type 'pipenv install'(To install the dependencies)
 
 7. Then run the application using 'python manage.py runserver'
 
 
-About the Inventory Management System:
+## About the Inventory Management System:
 
 I first created an application using Django and imported external libraries to help me in this project. The application (invApp) is separated into templates, static, and its provided files.
 
