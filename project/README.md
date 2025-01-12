@@ -19,7 +19,7 @@ Steps to Open website:
 
 6. Type 'pipenv install'(To install the dependencies) in the terminal
 
-7. Then run the application using 'python manage.py runserver'
+7. Then run the application using 'python manage.py runserver' in the terminal
 
 
 ## About how i built the Inventory Management System:
