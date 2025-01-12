@@ -15,9 +15,9 @@ Steps to Open website:
 
 4. Go into my base directory (cd project/finalproject)
 
-5. Type 'pipenv shell'
+5. Type 'pipenv shell' in the terminal
 
-6. Type 'pipenv install'(To install the dependencies)
+6. Type 'pipenv install'(To install the dependencies) in the terminal
 
 7. Then run the application using 'python manage.py runserver'
 
