@@ -10,12 +10,16 @@ Steps to Open website:
 1. Clone my project
 
 2. I used a virtual environment called pipenv to separate the dependencies required for this project from other projects that I have. Hence you will need to
-  - pip install pipenv (If not already installed)
-  -Go into my base directory (cd CS50X/Week10/project/finalproject)
-  -Type 'pipenv install'
-  -Type 'pipenv shell'
 
-3. Then run the application using 'python manage.py runserver'
+3. pip install pipenv (If not already installed)
+
+4. Go into my base directory (cd project/finalproject)
+
+5. Type 'pipenv shell'
+
+6. Type 'pipenv install'
+
+7. Then run the application using 'python manage.py runserver'
 
 
 About the Inventory Management System:
