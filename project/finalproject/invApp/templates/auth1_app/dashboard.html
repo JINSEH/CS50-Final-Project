@@ -1,0 +1,122 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h3>Dashboard</h3>
+<div class="container d-flex justify-content-center align-items-center" style="min-width: 700px">
+  <div class="row">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>Sales Activity</h4>
+      <h4 class="text-end d-inline mx-5">Inventory Summary</h4>
+    </div>
+    <div class="col-md-2 my-3 d-flex flex-column justify-content-between">
+      <div class="card text-bg-info mb-3" style="max-width: 18rem;height: 250px;">
+        <div class="card-body text-center mt-5">
+          <h3 class="card-title text-danger">{{ packed }}</h3>
+          <p class="card-subtitle text-muted">Pkgs</p>
+          <h5 class="card-text text-white">To be Packed</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 my-3 d-flex flex-column justify-content-between">
+      <div class="card text-bg-danger mb-3" style="max-width: 18rem;height: 250px;">
+        <div class="card-body text-center mt-5">
+          <h3 class="card-title text-info">{{ shipped }}</h3>
+          <p class="card-subtitle text-muted">Pkgs</p>
+          <h5 class="card-text">To be Shipped</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 my-3 d-flex flex-column justify-content-between">
+      <div class="card text-bg-primary mb-3" style="max-width: 18rem;height: 250px;">
+        <div class="card-body text-center mt-5">
+          <h3 class="card-title text-warning">{{ delivered }}</h3>
+          <p class="card-subtitle text-muted">Pkgs</p>
+          <h5 class="card-text">To be Delivered</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card border-info mb-3">
+        <div class="card-body d-flex justify-content-between">
+          <h5 class="card-text">Quantity in Hand</h5>
+          <h4 class="text-warning">{{total_quantity}}</h4>
+        </div>
+      </div>
+      <div class="card mb-3 border-dark" style="height: 190px;">
+        <div class="card-body d-flex justify-content-between">
+          <h5 class="card-text mt-5">Best Selling Products</h5>
+          <div class="text-end" style="width: 200px;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-warning" style="font-size: 1.2rem;">1. {{ top.name }}</li>
+              <li class="list-group-item text-secondary" style="font-size: 1.2rem;">2. {{ second.name }}</li>
+              <li class="list-group-item" style="color: #CD7F32; font-size: 1.2rem;">3. {{ third.name }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-3 border">
+  <div class="card-body">
+    <h5 class="card-title text-primary text-center">Sales, Inventory and Inventory Turnover</h5>
+    <div>
+      <canvas id="mixed-chart" class="w-100" style="height: 300px;"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid d-flex justify-content-center">
+    <div class="col-md-5 card mx-3">
+      <div class="card-body">
+        <h5 class="card-title text-primary">Average Monthly Sales Revenue</h5>
+        <div class="d-flex justify-content-between my-3">
+          <div class="text-center">
+            <h5>New Customers</h5>
+            <h4 class="text-warning">778</h4>
+          </div>
+          <div class="text-center">
+            <h5>Monthly Sales Growth</h5>
+            <h4 class="text-warning">76%</h4>
+          </div>
+          <div class="text-center">
+            <h5>Sales Revenue</h5>
+            <h4 class="text-warning">1,1180,378 $</h4>
+          </div>
+        </div>
+        <div>
+          <canvas class="w-100 h-100" id="total-views-chart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 card mx-3">
+      <div class="card-body">
+        <h5 class="card-title text-primary">Revenue vs Cost</h5>
+        <div class="d-flex justify-content-between my-3">
+          <div class="text-center">
+            <h5>Total Revenue</h5>
+            <h4 class="text-success">1,180,378 $</h4>
+          </div>
+          <div class="text-center">
+            <h5>Total Cost</h5>
+            <h4 class="text-danger">430,578 $</h4>
+          </div>
+          <div class="text-center">
+            <h5>Gross Profit</h5>
+            <h4 class="text-primary">749,800 $</h4>
+          </div>
+        </div>
+        <div>
+          <canvas id="revenue-chart" class="w-100 h-100"></canvas>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

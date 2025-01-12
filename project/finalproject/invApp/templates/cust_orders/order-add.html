@@ -1,0 +1,53 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block title %}Add Sales Order{% endblock %}
+{% block content %}
+<div class="container p-3 mt-3 border">
+  <h1 class="display-5 text-center">Add or Update an Order</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.order_no.label_tag }} {{ form.order_no }}
+    {{ form.customer_name.label_tag }} {{ form.customer_name }}
+    <label for="id_date" class="form-label">{{ form.date.label }}</label>
+    {{ form.date }}
+    <label for="id_deadline" class="form-label">{{ form.deadline.label }}</label>
+    {{ form.deadline }}
+    <div class="text-danger">{{ form.deadline.errors }}</div>
+    <div class="my-3">
+      <label for="products">Products:</label>
+      {{ form.products }}
+    </div>
+    <div class="status-radio mt-3 d-flex align-items-center">
+      <p class="m-2">Status:</p>
+      {% for choice in form.status.field.choices %}
+        <input
+          type="radio"
+          id="status_{{ choice.0 }}"
+          name="{{ form.status.name }}"
+          value="{{ choice.0 }}"
+          {% if form.status.value == choice.0 %}checked{% endif %}
+        >
+        <label for="status_{{ choice.0 }}">{{ choice.1 }}</label>
+      {% endfor %}
+    </div>
+
+    <div class="delivery-radio my-3">
+      <p>Delivery:</p>
+      {% for choice in form.delivery.field.choices %}
+        <input
+          type="radio"
+          id="delivery_{{ choice.0 }}"
+          name="{{ form.delivery.name }}"
+          value="{{ choice.0 }}"
+          {% if form.delivery.value == choice.0 %}checked{% endif %}
+        >
+        <label for="delivery_{{ choice.0 }}">{{ choice.1 }}</label>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success">Add/Edit</button>
+    <a href="{% url 'order-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

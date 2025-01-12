@@ -1,0 +1,50 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block title %}Add order{% endblock %}
+{% block content %}
+<div class="container p-3 mt-3 border">
+  <h1 class="display-5 text-center">Add or Update an Order</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.invoice_no.label_tag }}
+      {{ form.invoice_no }}
+  </div>
+    <div class="mb-3">
+      {{ form.products.label_tag }}  <!-- Products rendered as radio buttons -->
+      {{ form.products }}  <!-- This should display the radio buttons for products -->
+    </div>
+    <div class="mb-3">
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+    </div>
+    <div class="mb-3">
+        {{ form.date.label_tag }}
+        {{ form.date }}
+    </div>
+    <div class="mb-3">
+        {{ form.deadline.label_tag }}
+        {{ form.deadline }}
+    </div>
+    <div class="status-radio mt-3 mb-3 d-flex align-items-center">
+      <p class="m-2">Status:</p>
+      {% for choice in form.status.field.choices %}
+        <div class="status-option">
+          <input
+            type="radio"
+            id="status_{{ choice.0 }}"
+            name="{{ form.status.name }}"
+            value="{{ choice.0 }}"
+            {% if form.status.value == choice.0 %}checked{% endif %}
+            class="status-radio-input"
+          >
+          <label for="status_{{ choice.0 }}" class="status-radio-label">{{ choice.1 }}</label>
+        </div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-success">Add/Edit</button>
+    <a href="{% url 'purchase-orders-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

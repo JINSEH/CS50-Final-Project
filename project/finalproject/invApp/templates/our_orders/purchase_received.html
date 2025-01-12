@@ -1,0 +1,14 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block title %}Order Already Received{% endblock %}
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center vh-100 flex-column">
+      {% if messages %}
+        {% for message in messages %}
+        <h1 class="display-4 text-center">{{ message }}</h1>
+        {% endfor %}
+      {% endif %}
+      <a class="btn btn-primary mt-3" href="{% url "purchase-orders-list" %}">Go back</a>
+    </div>
+{% endblock %}

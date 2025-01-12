@@ -1,0 +1,175 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block title %}Sales List{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between">
+    <h3>Sales</h3>
+    <a href="{% url 'order-add' %}" class="btn btn-primary">New Sale</a>
+</div>
+
+<div class="row my-3">
+  <div class="col-sm-3 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-img" style="height: 190px; background: url('{% static "images/grad1.png" %}') no-repeat center center; background-size: cover;">
+      </div>
+        <div class="card-img-overlay">
+          <div class="card-body">
+            <h5 class="card-title display-6">Total Sales</h5>
+            <div class="d-flex h4 my-3 gap-2 align-items-center">
+              <i class="bi bi-receipt"></i>
+              <p class="card-text">${{ total_amount|floatformat:2 }}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-img" style="height: 190px; background: url('{% static "images/grad2.png" %}') no-repeat center center; background-size: cover;">
+      </div>
+        <div class="card-img-overlay">
+          <div class="card-body">
+            <h5 class="card-title display-6">Total Cost</h5>
+            <div class="d-flex h4 my-3 gap-2 align-items-center">
+              <i class="bi bi-cash-coin"></i>
+              <p class="card-text">${{ total_cost|floatformat:2 }}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-img" style="height: 190px; background: url('{% static "images/grad3.png" %}') no-repeat center center; background-size: cover;">
+      </div>
+        <div class="card-img-overlay">
+          <div class="card-body">
+            <h5 class="card-title display-6">Products Sold</h5>
+            <div class="d-flex h4 my-3 gap-2 align-items-center">
+              <i class="bi bi-person-check-fill"></i>
+              <p class="card-text">{{ number_of_products }}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-img" style="height: 190px; background: url('{% static "images/grad4.png" %}') no-repeat center center; background-size: cover;">
+      </div>
+        <div class="card-img-overlay">
+          <div class="card-body">
+            <h5 class="card-title display-6">Stock on Hand</h5>
+            <div class="d-flex h4 my-3 gap-2 align-items-center">
+              <i class="bi bi-box-seam"></i>
+              <p class="card-text">${{ cost_quantity | floatformat:2 }}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex mt-3">
+  <form method="GET" class="d-flex gap-3 align-items-center">
+    {% csrf_token %}
+    {{ myFilter.form.as_table }}
+    <button type="submit" class="btn btn-primary">
+      Search
+    </button>
+  </form>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order#</th>
+      <th>Customer Name</th>
+      <th>Total Amount</th>
+      <th>Products Ordered</th>
+      <th>Date</th>
+      <th>Deadline</th>
+      <th>Status</th>
+      <th>Delivery</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.order_no }}</td>
+      <td>{{ order.customer_name }}</td>
+      <td>${{ order.total_amount|floatformat:2 }}</td>
+      <td>
+        <ul>
+          {% for product in order.products.all %}
+          <li>{{ product.name }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+      <td>{{ order.date }}</td>
+      <td>{{ order.deadline }}</td>
+      <td>
+        <span
+          style="color: {% if order.status == 'not_paid' %}red{% else %}green{% endif %};">
+          {{ order.get_status_display }}
+        </span>
+      </td>
+      <td>
+        <span
+          style="color:
+            {% if order.delivery == 'packed' %}orange
+            {% elif order.delivery == 'shipped' %}blue
+            {% elif order.delivery == 'delivered' %}green
+            {% endif %};">
+          {{ order.get_delivery_display }}
+        </span>
+      </td>
+      <td>
+        <a href="{% url 'order-update' order.id %}" class="btn btn-warning ">Update</a>
+        <a href="{% url 'order-delete' order.id %}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="d-flex justify-content-center my-4">
+  <nav>
+    <ul class="pagination">
+      {% if orders.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">
+            <span aria-hidden="true">&laquo;&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ orders.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <li class="page-item disabled">
+        <span class="page-link">Page {{ orders.number }} of {{ orders.paginator.num_pages }}</span>
+      </li>
+
+      {% if orders.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ orders.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ orders.paginator.num_pages }}" aria-label="Last">
+            <span aria-hidden="true">&raquo;&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endblock %}

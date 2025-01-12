@@ -1,0 +1,18 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block title %}Delete Purchase Order{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Are you sure you want to Cancel this purchase order?</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success mt-3">
+        Cancel
+      </button>
+      <a class="btn btn-secondary mt-3" href="{% url 'purchase-orders-list' %}">Go back</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

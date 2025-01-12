@@ -1,0 +1,84 @@
+.status-radio {
+  display: flex;
+  gap: 10px;
+}
+
+.status-radio input[type="radio"] {
+  display: none;
+}
+
+.status-radio label {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.status-radio input[type="radio"]:checked + label {
+  font-weight: bold;
+}
+
+.status-radio input[type="radio"][value="not_paid"]:checked + label {
+  color: red;
+  border-color: red;
+}
+
+.status-radio input[type="radio"][value="paid"]:checked + label {
+  color: green;
+  border-color: green;
+}
+
+.status-radio input[type="radio"][value="not_received"]:checked + label {
+  color: red;
+  border-color: red;
+}
+
+.status-radio input[type="radio"][value="received"]:checked + label {
+  color: green;
+  border-color: green;
+}
+
+.delivery-radio {
+  display: flex;
+  gap: 10px;
+}
+
+.delivery-radio input[type="radio"] {
+  display: none;
+}
+
+.delivery-radio label {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delivery-radio input[type="radio"]:checked + label {
+  font-weight: bold;
+}
+
+.delivery-radio input[type="radio"][value="packed"]:checked + label {
+  color: orange;
+  border-color: orange;
+}
+
+.delivery-radio input[type="radio"][value="shipped"]:checked + label {
+  color: rgb(0, 89, 255);
+  border-color: rgb(0, 89, 255);
+}
+
+.delivery-radio input[type="radio"][value="delivered"]:checked + label {
+  color: green;
+  border-color: green;
+}
+
+.card-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+p.error{
+  color: red;
+}

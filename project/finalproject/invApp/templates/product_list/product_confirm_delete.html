@@ -1,0 +1,16 @@
+{% extends "partials/base.html" %}
+{% block title %}Delete Product{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Are you sure you want to delete this product?</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success mt-3">
+        Confirm
+      </button>
+      <a class="btn btn-secondary mt-3" href="{% url 'product-list' %}">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

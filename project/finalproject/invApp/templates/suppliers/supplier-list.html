@@ -1,0 +1,50 @@
+{% extends "partials/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+Supplier List
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+  <h1 class="display-4">Suppliers</h1>
+  <p class="lead">
+    Manage your Suppliers on this Page
+  </p>
+</div>
+<div class="container d-flex gap-4">
+  <!-- Form inside a table -->
+  <div class="form-container flex-fill border p-3">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <button type="submit" class="btn btn-success mt-3">Add Supplier</button>
+    </form>
+  </div>
+
+  <!-- Supplier table -->
+  <div class="table-container flex-fill">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Supplier's Name</th>
+          <th>Contact</th>
+          <th>Supplies</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for supplier in suppliers %}
+          <tr>
+            <td>{{ supplier.supplier_name }}</td>
+            <td>{{ supplier.contact }}</td>
+            <td>{{ supplier.supplies }}</td>
+            <td>
+              <a href="{% url 'supplier-update' supplier.id %}" class="btn btn-warning ">Edit</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

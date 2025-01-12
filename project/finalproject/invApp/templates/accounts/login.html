@@ -1,0 +1,29 @@
+{% extends "partials/base1.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;"">
+  <div class="border p-4 rounded shadow" style="width: 100%; max-width: 500px;">
+    <h2 class="text-center">Login</h2>
+    <form action="{% url "login" %}" method="POST">
+      {% csrf_token %}
+      {% comment "To store Hidden input after the login" %}{% endcomment %}
+      <input type="hidden" name="next" value="{{next}}">
+      <div class="form-group">
+        <label for="username">Company's Name</label>
+        <input class="form-control mb-3" autocomplete="off" autofocus type="text" name="username" id = "username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control mb-3" autocomplete="off" type="text" name="password" id = "password" required>
+      </div>
+      <button class="btn btn-primary mb-3" type="submit">Login</button>
+    </form>
+    {% comment "Check for any error message" %}{% endcomment %}
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+    <p>Don't Have an account? <a href="{% url "register" %}">Register Here</a></p>
+  </div>
+</div>
+{% endblock content %}

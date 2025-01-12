@@ -1,0 +1,16 @@
+{% extends "partials/base1.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;"">
+  <div class="border p-4 rounded shadow" style="width: 100%; max-width: 500px;">
+    <h2 class="text-center">Logout</h2>
+    <p class="text-center">Are you sure you want to log out?</p>
+    <form class="text-center" action="{% url "logout" %}" method="POST">
+      {% csrf_token %}
+      <button class="btn btn-primary mb-3" type="submit">Logout</button>
+      <a class="btn btn-secondary mb-3" href="{% url "home" %}">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock content %}

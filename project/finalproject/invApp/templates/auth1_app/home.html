@@ -1,0 +1,68 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+Index Page
+{% endblock %}
+
+{% block content %}
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the Inventory Management System</h1>
+    <p class="lead">
+      Manage your products efficiently and effectively.
+    </p>
+    <hr class="my-4">
+    <p>
+      Use the navigation bar to direct to Dashboard, Suppliers, Products and More!
+    </p>
+  </div>
+
+  <div class="container d-flex gap-3 align-items-stretch justify-content-center">
+    <div class="card mb-3 text-white jumbotron text-center" style="flex: 1; min-height:10rem; max-height: 30rem; max-width: 25rem;">
+      <img src="{% static 'images/products.png' %}" class="card-img transparent-image" alt="" style="height:100%;">
+      <div class="card-img-overlay mt-4">
+        <h5 class="card-title">Products</h5>
+        <p class="card-text">Manage your products with ease: create, update, view, and delete.</p>
+        <a href="{% url 'product-list' %}" class="btn btn-primary">My Products</a>
+      </div>
+    </div>
+    <div class="card mb-3 text-white jumbotron text-center" style="flex: 1; min-height:10rem; max-height: 30rem; max-width: 25rem;">
+      <img src="{% static 'images/supplier.png' %}" class="card-img transparent-image" alt="">
+      <div class="card-img-overlay mt-4">
+        <h5 class="card-title">Suppliers</h5>
+        <p class="card-text">Effortlessly manage your suppliers: add, update, view, and remove.</p>
+        <a href="{% url 'supplier-list' %}" class="btn btn-primary">My Suppliers</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container d-flex gap-3 align-items-stretch justify-content-center">
+    <div class="card mb-3 text-white jumbotron text-center" style="flex: 1; min-height:10rem; max-height: 30rem; max-width: 25rem;">
+      <img src="{% static 'images/sales.png' %}" class="card-img transparent-image" alt="">
+      <div class="card-img-overlay mt-4">
+        <h5 class="card-title">Purchase Orders</h5>
+        <p class="card-text">Streamline Your Supply Chain: Simplify, Track, and Manage Purchase Orders with Ease!</p>
+        <a href="{% url 'purchase-orders-list' %}" class="btn btn-primary">My Purchases</a>
+      </div>
+    </div>
+    <div class="card mb-3 text-white jumbotron text-center" style="flex: 1; min-height:10rem; max-height: 30rem; max-width: 25rem;">
+      <img src="{% static 'images/customer.png' %}" class="card-img transparent-image" alt="">
+      <div class="card-img-overlay mt-4">
+        <h5 class="card-title">Sales and Customers</h5>
+        <p class="card-text">Streamline your sales and orders: track, manage, and optimize performance.</p>
+        <a href="{% url 'order-list' %}" class="btn btn-primary">Sales and Customers</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container d-flex justify-content-center">
+    <div class="card mb-3 text-white jumbotron text-center" style="flex: 1; min-height:10rem; max-height: 30rem; max-width: 25rem;">
+      <img src="{% static 'images/dashboard.png' %}" class="card-img transparent-image" alt="">
+      <div class="card-img-overlay mt-4 p-5">
+        <h5 class="card-title">Dashboard</h5>
+        <p class="card-text">Visualize your data: track key metrics and insights at a glance.</p>
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

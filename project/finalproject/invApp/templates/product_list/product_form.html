@@ -1,0 +1,54 @@
+{% extends "partials/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+Product Form
+{% endblock %}
+{% block content %}
+<h1 class="text-center">Product Form</h1>
+<div class="container custom-border p-3 shadow">
+  <form method="POST" class="jumbotron">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.product_id.label_tag }}
+      {{ form.product_id }}
+    </div>
+    <div class="mb-3">
+      {{ form.name.label_tag }}
+      {{ form.name }}
+    </div>
+    <div class="mb-3">
+      {{ form.sku.label_tag }}
+      {{ form.sku }}
+    </div>
+    <div class="mb-3">
+      {{ form.price.label_tag }}
+      {{ form.price }}
+    </div>
+    <div class="mb-3">
+      {{ form.cost.label_tag }}
+      {{ form.cost }}
+    </div>
+    <div class="mb-3">
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+    </div>
+    <div class="mb-3">
+      {{ form.supplier.label_tag }}
+      {{ form.supplier }}
+    </div>
+    <div class="mb-3">
+      <strong>Don't have your supplier?</strong>
+      <a href="{% url "supplier-list" %}">Create Supplier Here</a>
+    </div>
+    <button class="btn btn-success btn-block" type="submit">Save Product</button>
+    <a href="{% url 'product-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+
+<style>
+  .custom-border {
+    border: 2px solid #808080;
+    border-radius: 8px; /* Optional: for rounded corners */
+  }
+</style>
+{% endblock %}
